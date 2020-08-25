@@ -31,6 +31,15 @@ type Parameter struct {
 	driIf					map[int]string
 	myTopic					string
 	toTopic					string
+	opMap					map[string]interface{}
+}
+
+func (p *Parameter) OpMap() map[string]interface{} {
+	return p.opMap
+}
+
+func (p *Parameter) SetOpMap(opMap map[string]interface{}) {
+	p.opMap = opMap
 }
 
 func (p *Parameter) ToTopic() string {

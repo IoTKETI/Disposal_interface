@@ -21,7 +21,7 @@ type bodyRQ struct {
 	//======Body
 	Mis []int	`json:"mis"`
 	Tis []int 	`json:"tis"`
-	fp ObjectTypeParameters.Fp
+	Fp ObjectTypeParameters.Fp `json:"fp"`
 }
 
 type headerRS struct {
@@ -42,9 +42,9 @@ func Request(parameters *Parameters.Parameter, mqttClient mqtt.Client) {
 
 	tempB := bodyRQ{parameters.MicroserviceIDs(), parameters.TaskIDs(),parameters.FlexibleTaskParameter()}
 	b, _ := json.Marshal(tempB)
+	fmt.Println(string(b))
 	//	b, _ := json.MarshalIndent(tempB, "", " ")
 	j := regexp.MustCompile(`(\s*?{\s*?|\s*?,\s*?)(['"])?([a-zA-Z0-9]+)(['"])?:`).ReplaceAll(b, []byte("$1$3="))
-
 	kj := string(k) + string(j)
 	result := bytes.ReplaceAll([]byte(kj), []byte("\""), []byte(""))
 
@@ -87,7 +87,7 @@ func RQparsing(data []byte,parameters *Parameters.Parameter)  {
 	var re = regexp.MustCompile(`(\s*?{\s*?|\s*?\,\s*?)(['"])?([a-zA-Z]+)(['"])?`) //string array
 	s := re.ReplaceAll(htemp,[]byte("$1\"$3\""))
 	//fmt.Println(string(s))
-	ab := regexp.MustCompile(`(\s*?:\s*?|\s*?}\s*?)(['"])?([a-zA-Z0-9]+)(['"])?}`).ReplaceAll(s,[]byte("$1\"$3\"}"))
+	//ab := regexp.MustCompile(`(\s*?:\s*?|\s*?}\s*?)(['"])?([a-zA-Z0-9]+)(['"])?}`).ReplaceAll(s,[]byte("$1\"$3\"}"))
 	//fmt.Println(string(ab))
 	harray := headerRQ{}
 	e := json.Unmarshal(s, &harray)
@@ -103,23 +103,29 @@ func RQparsing(data []byte,parameters *Parameters.Parameter)  {
 
 	//body
 	btemp := bytes.TrimSpace(bytes.ReplaceAll(bytes.ReplaceAll(body,[]byte("="),[]byte(":")),[]byte(";"),[]byte(",")))
-	s = re.ReplaceAll(btemp,[]byte("$1\"$3\""))
+	fmt.Println(string(btemp))
+	//s = re.ReplaceAll(btemp,[]byte("$1\"$3\""))
 
-	var stringArray = regexp.MustCompile(`(\s*?\[\s*?|\s*?\]\s*?)(['"])?([a-zA-Z]+)(['"])?`) //string array
-	s = stringArray.ReplaceAll(btemp,[]byte("$1\"$3\""))
-	ab = regexp.MustCompile(`(\s*?{\s*?|\s*?,\s*?)(['"])?([a-zA-Z0-9]+)(['"])?:`).ReplaceAll(s,[]byte("$1\"$3\":"))
-	//	fmt.Println(string(ab))
+	//var stringArray = regexp.MustCompile(`(\s*?\[\s*?|\s*?\]\s*?)(['"])?([a-zA-Z]+)(['"])?`) //string array
+	//s = stringArray.ReplaceAll(btemp,[]byte("$1\"$3\""))
+	//fmt.Println(string(s))
+	//ab := regexp.MustCompile(`(\s*?{\s*?|\s*?,\s*?)(['"])?([a-zA-Z0-9]+)(['"])?:`).ReplaceAll(btemp,[]byte("$1\"$3\":"))
+	//fmt.Println(string(ab))
+	var all = regexp.MustCompile(`([a-zA-Z0-9-]+):([a-zA-Z0-9-]+)?`) //string array
+	allquoted := all.ReplaceAll(btemp,[]byte("\"$1\":\"$2\""))
+	allquoted = bytes.ReplaceAll([]byte(allquoted),[]byte("\"\""),[]byte(""))
+	fmt.Println(string(allquoted))
 
 	barray := bodyRQ{}
-	e = json.Unmarshal(ab, &barray)
+	e = json.Unmarshal(allquoted, &barray)
 	if e != nil {
 		panic(e)
 	}
 
 	parameters.SetMicroserviceIDs(barray.Mis)
 	parameters.SetTaskIDs(barray.Tis)
-	parameters.SetFlexibleTaskParameter(barray.fp)
-	fmt.Printf("\tParsing Completed: 'mis'=> %v 'tis'=> %v 'tis'=> %v \r\n",parameters.MicroserviceIDs(),parameters.TaskIDs(),parameters.FlexibleTaskParameter())
+	parameters.SetFlexibleTaskParameter(barray.Fp)
+	fmt.Printf("\tParsing Completed: 'mis'=> %v 'tis'=> %v 'fp.oprd'=> %v 'fp.sprd'=> %v \r\n",parameters.MicroserviceIDs(),parameters.TaskIDs(),parameters.FlexibleTaskParameter().Oprd,parameters.FlexibleTaskParameter().Sprd)
 
 }
 

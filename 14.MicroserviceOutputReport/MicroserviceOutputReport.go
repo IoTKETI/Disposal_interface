@@ -8,18 +8,20 @@ import (
 	"gw/Parameters"
 	"regexp"
 	"strconv"
+
+	//"strconv"
 )
 
 type headerRQ struct {
 	//======Header
-	If  string    `json:"if"`
-	Dri string    `json:"dri"`
+	If  int    `json:"if"`
+	Dri int    `json:"dri"`
 	Di string `json:"di"`
 }
 
 type bodyRQ struct {
 	//======Body
-	Mi string	`json:"mi"`
+	Mi int	`json:"mi"`
 	Op string `json:"op"`
 
 }
@@ -36,19 +38,20 @@ type headerRS struct {
 //Request
 func Request(parameters *Parameters.Parameter, mqttClient mqtt.Client) {
 
-	tempH := headerRQ{string(parameters.InterfaceID()),string(parameters.DisposableIoTRequestID()),parameters.DeviceID()}
+	tempH := headerRQ{parameters.InterfaceID(),parameters.DisposableIoTRequestID(),parameters.DeviceID()}
 	h, _ := json.Marshal(tempH)
 	//	h, _ := json.MarshalIndent(tempH, "", " ")
 	k := regexp.MustCompile(`(\s*?{\s*?|\s*?,\s*?)(['"])?([a-zA-Z0-9]+)(['"])?:`).ReplaceAll(h, []byte("$1$3="))
 	k = bytes.ReplaceAll(k, []byte(","), []byte(";"))
+	fmt.Println(string(h))
 
-	tempB := bodyRQ{string(parameters.MicroserviceID()),parameters.OutputParameter()}
+	tempB := bodyRQ{parameters.MicroserviceID(),parameters.OutputParameter()}
 	b, _ := json.Marshal(tempB)
 	//	b, _ := json.MarshalIndent(tempB, "", " ")
 	j := regexp.MustCompile(`(\s*?{\s*?|\s*?,\s*?)(['"])?([a-zA-Z0-9]+)(['"])?:`).ReplaceAll(b, []byte("$1$3="))
 
 	kj := string(k) + string(j)
-	result := bytes.ReplaceAll([]byte(kj), []byte("\""), []byte(""))
+	result := bytes.ReplaceAll([]byte(kj), []byte("\n"), []byte(""))
 
 	//fmt.Println(string(result))
 	fmt.Println("[REQ] Send to Server =>>>" , string(result))
@@ -57,7 +60,7 @@ func Request(parameters *Parameters.Parameter, mqttClient mqtt.Client) {
 	//	panic(token.Error())
 	//}
 
-	//RQparsing([]byte(result),parameters)
+	RQparsing([]byte(result),parameters)
 }
 
 //Response
@@ -102,44 +105,61 @@ func RQparsing(data []byte,parameters *Parameters.Parameter)  {
 
 	//header
 	htemp := bytes.TrimSpace(bytes.ReplaceAll(bytes.ReplaceAll(header,[]byte("="),[]byte(":")),[]byte(";"),[]byte(",")))
-	//var re = regexp.MustCompile(`(\s*?:\s*?|\s*?\,\s*?)(['"])?([a-zA-Z]+)(['"])?`) //string array
-	//
-	var re = regexp.MustCompile(`([a-zA-Z0-9-]+):([a-zA-Z0-9-]+)`) //string array
-	s := re.ReplaceAll(htemp,[]byte("\"$1\":\"$2\""))
-	fmt.Println(string(s))
-	harray := headerRQ{}
-	e := json.Unmarshal(s, &harray)
+//	var re = regexp.MustCompile(`(\s*?:\s*?|\s*?\,\s*?)(['"])?([a-zA-Z]+)(['"])?`) //string array
 
-	if e != nil {
-		panic(e)
+	var all = regexp.MustCompile(`([a-zA-Z0-9-]+):([a-zA-Z0-9-]+)?`) //string array
+	allquoted := all.ReplaceAll(htemp,[]byte("\"$1\":\"$2\""))
+	allquoted = bytes.ReplaceAll([]byte(allquoted),[]byte("\"\""),[]byte(""))
+	fmt.Println(string(allquoted))
+
+	var mapTemp map[string]interface{}
+	if err := json.Unmarshal(allquoted, &mapTemp); err != nil {
+		panic(err)
 	}
+	//fmt.Println(mapTemp)
 
-	v,_ := strconv.Atoi(harray.If)
+	v,_ := strconv.Atoi(mapTemp["if"].(string))
 	parameters.SetInterfaceID(v)
-	v,_ = strconv.Atoi(harray.Dri)
+	v,_ = strconv.Atoi(mapTemp["dri"].(string))
 	parameters.SetDisposableIoTRequestID(v)
-	parameters.SetDeviceID(harray.Di)
+	parameters.SetDeviceID(mapTemp["di"].(string))
 	fmt.Printf("\tParsing Completed: 'if'=> %d, 'dri'=> %d, 'di'=> %s \r\n",parameters.InterfaceID(), parameters.DisposableIoTRequestID(),parameters.DeviceID())
 
 
 	//body
+	///fmt.Println(string(body))
 	btemp := bytes.TrimSpace(bytes.ReplaceAll(bytes.ReplaceAll(body,[]byte("="),[]byte(":")),[]byte(";"),[]byte(",")))
-	s = re.ReplaceAll(btemp,[]byte("$1\"$3\""))
-	var stringArray = regexp.MustCompile(`(\s*?\[\s*?|\s*?\]\s*?)(['"])?([a-zA-Z]+)(['"])?`) //string array
-	s = stringArray.ReplaceAll(btemp,[]byte("$1\"$3\""))
-	ab := regexp.MustCompile(`(\s*?{\s*?|\s*?,\s*?)(['"])?([a-zA-Z0-9]+)(['"])?:`).ReplaceAll(s,[]byte("$1\"$3\":"))
+	btemp = bytes.ReplaceAll(btemp,[]byte("\""),[]byte(""))
+	btemp = bytes.ReplaceAll(btemp,[]byte("n"),[]byte(""))
+	btemp = bytes.ReplaceAll(btemp,[]byte("\\"),[]byte(""))
+	fmt.Println(string(btemp))
+	//s := re.ReplaceAll(btemp,[]byte("$1\"$3\""))
+	//var stringArray = regexp.MustCompile(`(\s*?\[\s*?|\s*?\]\s*?)(['"])?([a-zA-Z]+)(['"])?`) //string array
+	//s = stringArray.ReplaceAll(btemp,[]byte("$1\"$3\""))
+	//ab := regexp.MustCompile(`(\s*?{\s*?|\s*?,\s*?)(['"])?([a-zA-Z0-9]+)(['"])?:`).ReplaceAll(s,[]byte("$1\"$3\":"))
+	//fmt.Println(string(ab))
+	var alla = regexp.MustCompile(`([a-zA-Z0-9-]+):([a-zA-Z0-9-]+)?`) //string array
+	allquoted = alla.ReplaceAll(btemp,[]byte("\"$1\":\"$2\""))
+	allquoted = bytes.ReplaceAll([]byte(allquoted),[]byte("\"\""),[]byte(""))
+//	fmt.Println(string(allquoted))
 
-	barray := bodyRQ{}
-	e = json.Unmarshal(ab, &barray)
-	if e != nil {
-		panic(e)
+	var bmapTemp map[string]interface{}
+	if err := json.Unmarshal(allquoted, &bmapTemp); err != nil {
+		panic(err)
 	}
 
-	v,_ = strconv.Atoi(barray.Mi)
-	parameters.SetMicroserviceID(v)
-	parameters.SetOutputParameter(barray.Op)
-	fmt.Printf("\tParsing Completed: 'mi'=> %s, 'op'=> %v \r\n",parameters.MicroserviceID(),parameters.OutputParameter())
+//	fmt.Println(bmapTemp)
 
+	v,_ = strconv.Atoi(bmapTemp["mi"].(string))
+	parameters.SetMicroserviceID(v)
+	//str := fmt.Sprintf("%v",bmapTemp["op"])
+	parameters.SetOpMap(bmapTemp["op"].(map[string]interface{}))
+	//parameters.SetOutputParameter(mapTemp["op"].(ObjectTypeParameters.Op))
+	fmt.Printf("\tParsing Completed: 'mi'=> %s, 'op'=> %v \r\n",parameters.MicroserviceID(),parameters.OpMap())
+
+	for k,v := range parameters.OpMap(){
+		fmt.Println(k,v)
+	}
 }
 
 

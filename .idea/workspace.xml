@@ -33,7 +33,16 @@
       <recent name="$PROJECT_DIR$" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Go Build.go build server.go">
+    <configuration name="go build MicroserviceOutputReport.go" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
+      <module name="GW-edge" />
+      <working_directory value="$PROJECT_DIR$" />
+      <kind value="FILE" />
+      <filePath value="$PROJECT_DIR$/14.MicroserviceOutputReport/MicroserviceOutputReport.go" />
+      <package value="GW-edge" />
+      <directory value="$PROJECT_DIR$" />
+      <method v="2" />
+    </configuration>
     <configuration name="go build gw" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
       <module name="GW-edge" />
       <working_directory value="$PROJECT_DIR$" />
@@ -43,8 +52,19 @@
       <directory value="$PROJECT_DIR$" />
       <method v="2" />
     </configuration>
+    <configuration name="go build server.go" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
+      <module name="GW-edge" />
+      <working_directory value="$PROJECT_DIR$" />
+      <kind value="FILE" />
+      <filePath value="$PROJECT_DIR$/server.go" />
+      <package value="GW-edge" />
+      <directory value="$PROJECT_DIR$" />
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Go Build.go build server.go" />
+        <item itemvalue="Go Build.go build MicroserviceOutputReport.go" />
         <item itemvalue="Go Build.go build gw" />
       </list>
     </recent_temporary>
@@ -61,22 +81,22 @@
       <screen x="0" y="23" width="1680" height="964" />
     </state>
     <state x="640" y="345" key="#Go_Modules/0.23.1680.964@0.23.1680.964" timestamp="1598243796808" />
-    <state width="1638" height="259" key="GridCell.Tab.0.bottom" timestamp="1598338093424">
+    <state width="1638" height="259" key="GridCell.Tab.0.bottom" timestamp="1598344665529">
       <screen x="0" y="23" width="1680" height="964" />
     </state>
-    <state width="1638" height="259" key="GridCell.Tab.0.bottom/0.23.1680.964@0.23.1680.964" timestamp="1598338093424" />
-    <state width="1638" height="259" key="GridCell.Tab.0.center" timestamp="1598338093423">
+    <state width="1638" height="259" key="GridCell.Tab.0.bottom/0.23.1680.964@0.23.1680.964" timestamp="1598344665529" />
+    <state width="1638" height="259" key="GridCell.Tab.0.center" timestamp="1598344665528">
       <screen x="0" y="23" width="1680" height="964" />
     </state>
-    <state width="1638" height="259" key="GridCell.Tab.0.center/0.23.1680.964@0.23.1680.964" timestamp="1598338093423" />
-    <state width="1638" height="259" key="GridCell.Tab.0.left" timestamp="1598338093423">
+    <state width="1638" height="259" key="GridCell.Tab.0.center/0.23.1680.964@0.23.1680.964" timestamp="1598344665528" />
+    <state width="1638" height="259" key="GridCell.Tab.0.left" timestamp="1598344665527">
       <screen x="0" y="23" width="1680" height="964" />
     </state>
-    <state width="1638" height="259" key="GridCell.Tab.0.left/0.23.1680.964@0.23.1680.964" timestamp="1598338093423" />
-    <state width="1638" height="259" key="GridCell.Tab.0.right" timestamp="1598338093424">
+    <state width="1638" height="259" key="GridCell.Tab.0.left/0.23.1680.964@0.23.1680.964" timestamp="1598344665527" />
+    <state width="1638" height="259" key="GridCell.Tab.0.right" timestamp="1598344665528">
       <screen x="0" y="23" width="1680" height="964" />
     </state>
-    <state width="1638" height="259" key="GridCell.Tab.0.right/0.23.1680.964@0.23.1680.964" timestamp="1598338093424" />
+    <state width="1638" height="259" key="GridCell.Tab.0.right/0.23.1680.964@0.23.1680.964" timestamp="1598344665528" />
     <state width="1638" height="320" key="GridCell.Tab.1.bottom" timestamp="1598248023242">
       <screen x="0" y="23" width="1680" height="964" />
     </state>

@@ -7,7 +7,6 @@ import (
 	DeviceRegistration "gw/1.DeviceRegistration"
 	MicroserviceCreation "gw/10.MicroserviceCreation"
 	MicroserviceRun "gw/11.MicroserviceRun"
-	MicroserviceOutputParameterRead "gw/13.MicroserviceOutputParameterRead"
 	MicroserviceOutputReport "gw/14.MicroserviceOutputReport"
 	MicroserviceStop "gw/15.MicroserviceStop"
 	DeviceMicroserviceInformationReport "gw/2.DeviceMicroserviceInformationReport"
@@ -73,6 +72,21 @@ func main() {
 
 	}
 
+
+	//Interface 21===================TaskParameterSet
+	// Originator: Server
+	//fmt.Println("Interface 21===================TaskParameterSet")
+	//parameters.SetInterfaceID(21)
+	//parameters.SetDisposableIoTRequestID(12348)
+	//parameters.DriIf()[parameters.DisposableIoTRequestID()] = ResourceName.TaskParameterSet
+	//parameters.SetMicroserviceIDs([]int{1})
+	//parameters.SetTaskIDs([]int{1})
+	//fp := ObjectTypeParameters.Fp{}
+	//fp.Oprd ="C"
+	//parameters.SetFlexibleTaskParameter(fp)
+	//TaskParameterSet.Request(parameters,mqttClient)
+
+
 	fmt.Println("Interface 14===================MicroserviceOutputReport")
 	parameters.SetInterfaceID(14)
 	parameters.SetDisposableIoTRequestID(12351)
@@ -80,8 +94,7 @@ func main() {
 	parameters.DriIf()[parameters.DisposableIoTRequestID()] = ResourceName.MicroserviceOutputReport
 	parameters.SetMicroserviceID(1)
 	Builder.Op([]string{"Atemp"},[]string{"29"},parameters)
-	MicroserviceOutputParameterRead.Response(parameters)
-	MicroserviceCreation.Request(parameters,mqttClient)
+	MicroserviceOutputReport.Request(parameters,mqttClient)
 
 
 
@@ -111,18 +124,6 @@ func main() {
 	MicroserviceRun.Request(parameters, mqttClient)
 
 
-	//Interface 21===================TaskParameterSet
-	// Originator: Server
-	fmt.Println("Interface 21===================TaskParameterSet")
-	parameters.SetInterfaceID(21)
-	parameters.SetDisposableIoTRequestID(12348)
-	parameters.DriIf()[parameters.DisposableIoTRequestID()] = ResourceName.TaskParameterSet
-	parameters.SetMicroserviceIDs([]int{1})
-	parameters.SetTaskIDs([]int{1})
-	fp := ObjectTypeParameters.Fp{}
-	fp.Oprd ="C"
-	parameters.SetFlexibleTaskParameter(fp)
-	TaskParameterSet.Request(parameters,mqttClient)
 
 
 	//Interface 15===================MS Stop
