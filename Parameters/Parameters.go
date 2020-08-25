@@ -258,5 +258,6 @@ func (p *Parameter) SetInterfaceID(interfaceID int) {
 }
 
 func NewParameter() *Parameter {
+
 	return &Parameter{}
 }

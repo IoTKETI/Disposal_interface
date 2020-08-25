@@ -61,22 +61,22 @@
       <screen x="0" y="23" width="1680" height="964" />
     </state>
     <state x="640" y="345" key="#Go_Modules/0.23.1680.964@0.23.1680.964" timestamp="1598243796808" />
-    <state width="1638" height="259" key="GridCell.Tab.0.bottom" timestamp="1598314267514">
+    <state width="1638" height="259" key="GridCell.Tab.0.bottom" timestamp="1598338093424">
       <screen x="0" y="23" width="1680" height="964" />
     </state>
-    <state width="1638" height="259" key="GridCell.Tab.0.bottom/0.23.1680.964@0.23.1680.964" timestamp="1598314267514" />
-    <state width="1638" height="259" key="GridCell.Tab.0.center" timestamp="1598314267513">
+    <state width="1638" height="259" key="GridCell.Tab.0.bottom/0.23.1680.964@0.23.1680.964" timestamp="1598338093424" />
+    <state width="1638" height="259" key="GridCell.Tab.0.center" timestamp="1598338093423">
       <screen x="0" y="23" width="1680" height="964" />
     </state>
-    <state width="1638" height="259" key="GridCell.Tab.0.center/0.23.1680.964@0.23.1680.964" timestamp="1598314267513" />
-    <state width="1638" height="259" key="GridCell.Tab.0.left" timestamp="1598314267513">
+    <state width="1638" height="259" key="GridCell.Tab.0.center/0.23.1680.964@0.23.1680.964" timestamp="1598338093423" />
+    <state width="1638" height="259" key="GridCell.Tab.0.left" timestamp="1598338093423">
       <screen x="0" y="23" width="1680" height="964" />
     </state>
-    <state width="1638" height="259" key="GridCell.Tab.0.left/0.23.1680.964@0.23.1680.964" timestamp="1598314267513" />
-    <state width="1638" height="259" key="GridCell.Tab.0.right" timestamp="1598314267514">
+    <state width="1638" height="259" key="GridCell.Tab.0.left/0.23.1680.964@0.23.1680.964" timestamp="1598338093423" />
+    <state width="1638" height="259" key="GridCell.Tab.0.right" timestamp="1598338093424">
       <screen x="0" y="23" width="1680" height="964" />
     </state>
-    <state width="1638" height="259" key="GridCell.Tab.0.right/0.23.1680.964@0.23.1680.964" timestamp="1598314267514" />
+    <state width="1638" height="259" key="GridCell.Tab.0.right/0.23.1680.964@0.23.1680.964" timestamp="1598338093424" />
     <state width="1638" height="320" key="GridCell.Tab.1.bottom" timestamp="1598248023242">
       <screen x="0" y="23" width="1680" height="964" />
     </state>
@@ -93,6 +93,10 @@
       <screen x="0" y="23" width="1680" height="964" />
     </state>
     <state width="1638" height="320" key="GridCell.Tab.1.right/0.23.1680.964@0.23.1680.964" timestamp="1598248023242" />
+    <state width="500" height="445" key="SwitcherDM" timestamp="1598336065904">
+      <screen x="0" y="23" width="1680" height="964" />
+    </state>
+    <state width="500" height="445" key="SwitcherDM/0.23.1680.964@0.23.1680.964" timestamp="1598336065904" />
     <state x="430" y="122" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1598263875590">
       <screen x="0" y="23" width="1680" height="964" />
     </state>

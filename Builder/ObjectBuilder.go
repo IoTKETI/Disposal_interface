@@ -104,11 +104,11 @@ func Op(key []string, value []string, parameters *Parameters.Parameter) {
 
 	var sfs []reflect.StructField
 
-	for i, v := range value {
-		t := reflect.TypeOf(v)
+	for i := range value {
+		//t := reflect.TypeOf(v)
 		sf := reflect.StructField{
 			Name: key[i],
-			Type: t,
+			Type: reflect.TypeOf("s"),
 			Tag:  reflect.StructTag(fmt.Sprintf(`json:"%s"`, strings.ToLower(key[i]))),
 		}
 		sfs = append(sfs, sf)

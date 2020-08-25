@@ -7,10 +7,12 @@ import (
 	DeviceRegistration "gw/1.DeviceRegistration"
 	MicroserviceCreation "gw/10.MicroserviceCreation"
 	MicroserviceRun "gw/11.MicroserviceRun"
+	MicroserviceOutputParameterRead "gw/13.MicroserviceOutputParameterRead"
+	MicroserviceOutputReport "gw/14.MicroserviceOutputReport"
 	MicroserviceStop "gw/15.MicroserviceStop"
 	DeviceMicroserviceInformationReport "gw/2.DeviceMicroserviceInformationReport"
 	TaskParameterSet "gw/21.TaskParameterSet"
-	"gw/ObjectTypeParameters"
+	"gw/Builder"
 	"gw/Parameters"
 	"gw/ResourceName"
 	"io"
@@ -47,15 +49,17 @@ func setParam(p *Parameters.Parameter)  {
 }
 
 func main() {
-	parameters = Parameters.NewParameter()
+	parameters := Parameters.NewParameter()
 	setParam(parameters)
-	parameters.SetMyTopic("B")
+	parameters.SetMyTopic("A")
 	parameters.SetToTopic("A")
 	opts := mqtt.NewClientOptions().AddBroker("127.0.0.1:1883")
 	opts.ClientID=parameters.MyTopic()
 	opts.SetDefaultPublishHandler(MsgHandler)
 	deviceInfo = make(map[string]Parameters.Parameter)
 	mqttClient = mqtt.NewClient(opts)
+
+
 	driIf := make(map[int]string)
 	parameters.SetDriIf(driIf)
 
@@ -69,7 +73,21 @@ func main() {
 
 	}
 
+	fmt.Println("Interface 14===================MicroserviceOutputReport")
+	parameters.SetInterfaceID(14)
+	parameters.SetDisposableIoTRequestID(12351)
+	parameters.SetDeviceID("4dasc44321")
+	parameters.DriIf()[parameters.DisposableIoTRequestID()] = ResourceName.MicroserviceOutputReport
+	parameters.SetMicroserviceID(1)
+	Builder.Op([]string{"Atemp"},[]string{"29"},parameters)
+	MicroserviceOutputParameterRead.Response(parameters)
+	MicroserviceCreation.Request(parameters,mqttClient)
 
+
+
+
+
+/*
 	//Interface 10===================Microservice Creation
 	// Originator: Server
 	fmt.Println("Interface 10===================Microservice Creation")
@@ -78,6 +96,7 @@ func main() {
 	parameters.DriIf()[parameters.DisposableIoTRequestID()] = ResourceName.MicroserviceCreation
 	fmt.Println(parameters.DriIf()[parameters.DisposableIoTRequestID()])
 	parameters.SetMicroserviceIDs([]int{1,2})
+
 	MicroserviceCreation.Request(parameters,mqttClient)
 
 
@@ -114,7 +133,7 @@ func main() {
 	parameters.DriIf()[parameters.DisposableIoTRequestID()] = ResourceName.MicroserviceStop
 	parameters.SetMicroserviceIDs([]int{1,2})
 	MicroserviceStop.Request(parameters, mqttClient)
-
+*/
 	select{}
 
 }
@@ -184,7 +203,11 @@ func ParseRequestMsg(data []byte, parameters *Parameters.Parameter,client mqtt.C
 			//driIf[parameters.DisposableIoTRequestID()] = ResourceName.TaskRun
 			break
 		case ResourceName.MicroserviceOutputReport:
-
+			fmt.Println("[Received RQ] - MicroserviceOutputReport")
+			MicroserviceOutputReport.RQparsing(data,parameters)
+			parameters.SetResponseStatusCode(200)
+			MicroserviceOutputReport.Response(parameters,client)
+			parameters.DriIf()[parameters.DisposableIoTRequestID()] = ResourceName.MicroserviceOutputReport
 			//driIf[parameters.DisposableIoTRequestID()] = ResourceName.MicroserviceOutputReport
 			break
 		case ResourceName.TaskOff:
@@ -223,6 +246,12 @@ func ParseResponseMsg(data []byte,parameters *Parameters.Parameter,client mqtt.C
 		MicroserviceStop.RSparsing(data,parameters)
 		delete(parameters.DriIf(),parameters.DisposableIoTRequestID())
 		break
+
+	case ResourceName.MicroserviceOutputReport:
+		fmt.Println("[Received RS] - MicroserviceOutputReport")
+		MicroserviceOutputReport.RSparsing(data,parameters)
+		delete(parameters.DriIf(),parameters.DisposableIoTRequestID())
+		break
 	case ResourceName.DeviceRegistration:
 
 		DeviceRegistration.RSparsing(data,parameters)
@@ -239,10 +268,6 @@ func ParseResponseMsg(data []byte,parameters *Parameters.Parameter,client mqtt.C
 		delete(parameters.DriIf(),parameters.DisposableIoTRequestID())
 		break
 	case ResourceName.TaskRun:
-
-		delete(parameters.DriIf(),parameters.DisposableIoTRequestID())
-		break
-	case ResourceName.MicroserviceOutputReport:
 
 		delete(parameters.DriIf(),parameters.DisposableIoTRequestID())
 		break
