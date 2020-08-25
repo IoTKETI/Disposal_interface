@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="544b48be-e385-4a57-b6bf-42a92e7fb351" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Go File" />
+      </list>
+    </option>
+  </component>
+  <component name="GOROOT" path="/usr/local/go" />
+  <component name="ProjectId" id="1gWwb9z36ndlfVgoE0OCH0yGOvA" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="DefaultGoTemplateProperty" value="Go File" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="go.import.settings.migrated" value="true" />
+    <property name="go.tried.to.enable.integration.vgo.integrator" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="go build gw" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
+      <module name="GW-edge" />
+      <working_directory value="$PROJECT_DIR$" />
+      <kind value="PACKAGE" />
+      <filePath value="$PROJECT_DIR$/server.go" />
+      <package value="gw" />
+      <directory value="$PROJECT_DIR$" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Go Build.go build gw" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="VgoProject">
+    <integration-enabled>true</integration-enabled>
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="640" y="345" key="#Go_Modules" timestamp="1598243796808">
+      <screen x="0" y="23" width="1680" height="964" />
+    </state>
+    <state x="640" y="345" key="#Go_Modules/0.23.1680.964@0.23.1680.964" timestamp="1598243796808" />
+    <state width="1638" height="259" key="GridCell.Tab.0.bottom" timestamp="1598314267514">
+      <screen x="0" y="23" width="1680" height="964" />
+    </state>
+    <state width="1638" height="259" key="GridCell.Tab.0.bottom/0.23.1680.964@0.23.1680.964" timestamp="1598314267514" />
+    <state width="1638" height="259" key="GridCell.Tab.0.center" timestamp="1598314267513">
+      <screen x="0" y="23" width="1680" height="964" />
+    </state>
+    <state width="1638" height="259" key="GridCell.Tab.0.center/0.23.1680.964@0.23.1680.964" timestamp="1598314267513" />
+    <state width="1638" height="259" key="GridCell.Tab.0.left" timestamp="1598314267513">
+      <screen x="0" y="23" width="1680" height="964" />
+    </state>
+    <state width="1638" height="259" key="GridCell.Tab.0.left/0.23.1680.964@0.23.1680.964" timestamp="1598314267513" />
+    <state width="1638" height="259" key="GridCell.Tab.0.right" timestamp="1598314267514">
+      <screen x="0" y="23" width="1680" height="964" />
+    </state>
+    <state width="1638" height="259" key="GridCell.Tab.0.right/0.23.1680.964@0.23.1680.964" timestamp="1598314267514" />
+    <state width="1638" height="320" key="GridCell.Tab.1.bottom" timestamp="1598248023242">
+      <screen x="0" y="23" width="1680" height="964" />
+    </state>
+    <state width="1638" height="320" key="GridCell.Tab.1.bottom/0.23.1680.964@0.23.1680.964" timestamp="1598248023242" />
+    <state width="1638" height="320" key="GridCell.Tab.1.center" timestamp="1598248023241">
+      <screen x="0" y="23" width="1680" height="964" />
+    </state>
+    <state width="1638" height="320" key="GridCell.Tab.1.center/0.23.1680.964@0.23.1680.964" timestamp="1598248023241" />
+    <state width="1638" height="320" key="GridCell.Tab.1.left" timestamp="1598248023241">
+      <screen x="0" y="23" width="1680" height="964" />
+    </state>
+    <state width="1638" height="320" key="GridCell.Tab.1.left/0.23.1680.964@0.23.1680.964" timestamp="1598248023241" />
+    <state width="1638" height="320" key="GridCell.Tab.1.right" timestamp="1598248023242">
+      <screen x="0" y="23" width="1680" height="964" />
+    </state>
+    <state width="1638" height="320" key="GridCell.Tab.1.right/0.23.1680.964@0.23.1680.964" timestamp="1598248023242" />
+    <state x="430" y="122" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1598263875590">
+      <screen x="0" y="23" width="1680" height="964" />
+    </state>
+    <state x="430" y="122" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.23.1680.964@0.23.1680.964" timestamp="1598263875590" />
+    <state x="121" y="94" width="598" height="822" key="find.popup" timestamp="1598244561319">
+      <screen x="0" y="23" width="1680" height="964" />
+    </state>
+    <state x="121" y="94" width="598" height="822" key="find.popup/0.23.1680.964@0.23.1680.964" timestamp="1598244561319" />
+  </component>
+</project>
